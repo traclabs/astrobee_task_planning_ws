@@ -1,0 +1,9 @@
+<root>
+  <BehaviorTree>
+    
+    <Sequence>
+      <Undock robot="bumble"/>
+    </Sequence>
+    
+  </BehaviorTree>
+</root>

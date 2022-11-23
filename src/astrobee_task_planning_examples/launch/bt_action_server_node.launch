@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load plugin library names -->
+  <rosparam command="load" file="$(find astrobee_task_planning_examples)/config/bt_astrobee_plugin_libs.yaml" />
+  
+  <node name="bt_action_server_node"
+	pkg="bt_tools"
+	type="bt_action_server_node"
+	respawn="false" output="screen" > <!-- launch-prefix="xterm -e gdb **args" -->		
+  </node>
+
+</launch>

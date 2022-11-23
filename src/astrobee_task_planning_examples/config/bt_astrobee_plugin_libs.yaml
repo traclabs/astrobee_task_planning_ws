@@ -1,0 +1,4 @@
+bt_tools:
+  plugin_libs:
+  - "undock_bt_action"
+

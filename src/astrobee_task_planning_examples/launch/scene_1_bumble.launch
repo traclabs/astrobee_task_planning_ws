@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="robot_name" default="bumble"/>
+
+  <arg name="rviz" default="true"/>
+  <arg name="sviz" default="false"/>
+
+  <arg name="dds" default="false"/>
+  
+  <arg name="bumble_x" default="1.5"/>
+  <arg name="bumble_y" default="0.5"/>
+  <arg name="bumble_z" default="4.5"/>
+  <arg name="bumble_qx" default="0.0"/>
+  <arg name="bumble_qy" default="0.0"/>
+  <arg name="bumble_qz" default="0.0"/>
+  <arg name="bumble_qw" default="1.0"/>  
+
+  <!-- Astrobee Gazebo Simulation -->
+
+    <include file="$(find astrobee)/launch/sim.launch">
+      <arg name="dds" value="$(arg dds)"/>
+      <arg name="rviz" value="false"/>
+      <arg name="default_robot" value="false"/>
+      <arg name="bumble" value="false"/>
+      <arg name="honey" value="false"/>
+      <arg name="queen" value="false"/>
+      <arg name="sviz" value="$(arg sviz)"/>
+    </include>
+    
+    <!-- Spawn Bumble -->
+  <include file="$(find astrobee)/launch/spawn.launch">
+     <arg name="dds" value="$(arg dds)"/>
+     <arg name="ns" value="bumble"/>
+     <arg name="robot" value="sim_pub"/>
+     <arg name="pose" value="$(arg bumble_x) 
+                             $(arg bumble_y) 
+                             $(arg bumble_z) 
+                             $(arg bumble_qx) 
+                             $(arg bumble_qy) 
+                             $(arg bumble_qz) 
+                             $(arg bumble_qw)"/>                                                          
+  </include> 
+      
+  <!-- Undock (get ready to fly) -->      
+  <node name="enabling_immediate" 
+          pkg="dynamic_reconfigure" 
+          type="dynparam" 
+          args="set /bumble/cfg/choreographer enable_immediate True" 
+          output="screen"
+          ns="bumble"/>
+      
+      
+
+  <group if="$(arg rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" respawn="false" output="screen" launch-prefix="nice" args="-d $(find astrobee_task_planning_examples)/rviz/scene_1_bumble.rviz"/>
+  </group>
+
+
+</launch>
