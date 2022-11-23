@@ -1,3 +1,4 @@
 - git: {local-name: ros2_planning_system, uri: 'https://github.com/traclabs/ros2_planning_system.git', version: 'noetic-devel'}
 - git: {local-name: ros1_lifecycle, uri: 'https://github.com/traclabs/ros1_lifecycle', version: 'noetic-devel'}
+- git: {local-name: bt_tools, uri: 'git@bitbucket.org:traclabs/bt_tools', version: 'devel'}
 
